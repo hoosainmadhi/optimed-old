@@ -1,20 +1,20 @@
 <!DOCTYPE HTML>
 <html xmlns:th="https://www.thymeleaf.org">
 <head> 
-    <title>Patient Added</title>
+    <title>Consult Details</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
 
 <body>
-<div align="center">
+<div align="left">
     <h2>Patient Added</h2>
     <p th:text="'Patient Number: ' + ${patient.patientNumber}" />
     <p th:text="'Patient Name: ' + ${patient.patientName}" />
     <p th:text="'Medical Aid Number: ' + ${patient.medicalAidNumber}" />
     <p th:text="'Medical Aid: ' + ${patient.medicalAid}" />
     
-        <a href="/patient_form">Add New Patient</a> <br>
+        <a href="/new_patient">Add New Patient</a> <br>
         <a href="/patients">Patients</a>
 </div>
 </body>

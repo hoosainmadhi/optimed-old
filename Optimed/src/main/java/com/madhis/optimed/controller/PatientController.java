@@ -1,4 +1,3 @@
-
 package com.madhis.optimed.controller;
 
 import com.madhis.optimed.entity.Patient;
@@ -23,13 +22,11 @@ public class PatientController {
     @Autowired
     private PatientService patientService;
             
-   
        @RequestMapping(value = "/",method = {RequestMethod.GET}) 
         public String index(){
             return "index";
         }
     
-     
        @RequestMapping(value = "/patients",method = {RequestMethod.GET}) 
         public String viewAllPatients(Model model){
             List<Patient> listPatients = patientService.fetchPatientList();
@@ -37,52 +34,31 @@ public class PatientController {
             return "patients";
         }
     
-        @RequestMapping(value="/patient_form",method = {RequestMethod.GET})
+        @RequestMapping(value="/new_patient",method = {RequestMethod.GET})
         public String newPatientForm(Model model){
             Patient patient = new Patient();
             model.addAttribute("patient", patient);
-            return "patient_form";
+            return "new_patient";
         }
- 
-        @RequestMapping(value="/patient_form",method = {RequestMethod.POST})
+   
+        @RequestMapping(value="/consult",method = {RequestMethod.POST})
         public String submitForm(@ModelAttribute("patient") Patient patient) {
             patientService.savePatient(patient);
-    	    return "patientadded";
+    	    return "consult";
 }
         
-
-	@RequestMapping(value="/patient_delete/{id}", method = {RequestMethod.GET,RequestMethod.POST})
-        public String deletePatientId(Model model , @PathVariable(value="id") Long patientId){
+	@RequestMapping(value="/delete/{id}")
+	public String deletePatientId(@PathVariable(value="id") Long patientId){
             patientService.deletePatientById(patientId);
-            List<Patient> listPatients = patientService.fetchPatientList();
-            model.addAttribute("listPatients",listPatients);
-            return "patients";  
-	}       
+            return "redirect:/patients";  
+	    
+	}               
+       
+
 	
-        @PostMapping("/savepatients")
+	@PostMapping("/savepatients")
         public Patient savePatient(@RequestBody Patient patient){
             return patientService.savePatient(patient);
 }
-
-
-//	@DeleteMapping("/patient_delete/{id}")
-//	    public String deletePatient(@PathVariable(name = "id") int id ) {
-//		patientService.deletePatientById();
-//		return "redirect:/";       
-//}
-
-//        @GetMapping("/patients")
-//        public List<Patient> fetchPatientList(){
-//            return patientService.fetchPatientList();
-//        }
-
-             
-//        @DeleteMapping("/patients/{id}")
-//        public void deletePatientById(@PathVariable(value="id") Long patientId){
-//               patientService.deletePatientById(patientId);
-//        }
-        
-        
-
-        
+	
 }

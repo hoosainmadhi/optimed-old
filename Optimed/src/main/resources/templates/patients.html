@@ -17,7 +17,9 @@
                 <th>Patient Number</th>
                 <th>Medical Aid</th>
                 <th>Medical Aid Number</th>
-                <th>Edit</th>
+                <th>Consult Details</th>
+		<th>Edit/Delete</th>
+		
             </tr>
         </thead>
         <tbody>
@@ -29,18 +31,17 @@
                 <td th:text="${patient.medicalAid}">Medical Aid</td>
                 <td th:text="${patient.medicalAidNumber}">Medical Aid Number</td>
                 <td>
-                    
-	           <!--<a href="/edit_patient">Add New Patient</a><br>--> 
-			
-		   <a th:href="@{/patient_edit/{id}(id=${patient.patientId})}">Edit</a>
+                    <a th:href="@{/consult/{id}(id=${patient.patientId})}">Consult</a>
+		<td>
+                    <a th:href="@{/edit_patient/{id}(id=${patient.patientId})}">Edit</a>
 		   &nbsp;&nbsp;&nbsp;
-		   <a th:href="@{/patient_delete/{id}(id=${patient.patientId})}">Delete</a>
+		   <a th:href="@{/delete/{id}(id=${patient.patientId})}">Delete</a>
 		 
                 </td>
             </tr>
         </tbody>
     </table>
-        <a href="/patient_form">Add New Patient</a><br> 
+        <a href="/new_patient">Add New Patient</a><br> 
         <a href="/patients">Patients</a>
 </div>   
 </body>
