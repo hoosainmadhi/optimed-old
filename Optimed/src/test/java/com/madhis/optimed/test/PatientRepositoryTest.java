@@ -1,4 +1,4 @@
-package com.madhis.optimed.rename;
+package com.madhis.optimed.test;
 
 import com.madhis.optimed.entity.Patient;
 import com.madhis.optimed.repository.PatientRepository;
