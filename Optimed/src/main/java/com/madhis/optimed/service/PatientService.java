@@ -13,5 +13,7 @@ public interface PatientService {
     public List<Patient> fetchPatientByName(String name);
     
     public void deletePatientById(Long patientId);
+    
+    public Patient fetchPatientById(Long id);
 
 }

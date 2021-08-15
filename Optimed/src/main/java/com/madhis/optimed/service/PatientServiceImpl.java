@@ -34,4 +34,12 @@ public class PatientServiceImpl implements PatientService {
     public List<Patient> fetchPatientByName(String  patientName){
         return patientRepository.findByPatientName(patientName);
     }
+    
+    @Override
+    public Patient fetchPatientById(Long patientId){
+	    return patientRepository.getById(patientId);
+    }
+    
+    
+
 }

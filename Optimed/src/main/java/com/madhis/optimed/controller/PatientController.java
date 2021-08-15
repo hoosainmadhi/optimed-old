@@ -7,13 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
-
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
 
 @Controller
 
@@ -41,11 +39,11 @@ public class PatientController {
             return "new_patient";
         }
    
-        @RequestMapping(value="/consult",method = {RequestMethod.POST})
-        public String submitForm(@ModelAttribute("patient") Patient patient) {
-            patientService.savePatient(patient);
-    	    return "consult";
-}
+	@RequestMapping(value="/consult/{id}",method = {RequestMethod.GET})
+        public String showConsultForm(Model model,@PathVariable(value = "id") Long patientId){
+		model.addAttribute(patientService.fetchPatientById(patientId));
+		return "consult";
+	}	
         
 	@RequestMapping(value="/delete/{id}")
 	public String deletePatientId(@PathVariable(value="id") Long patientId){
@@ -54,11 +52,15 @@ public class PatientController {
 	    
 	}               
        
-
-	
 	@PostMapping("/savepatients")
         public Patient savePatient(@RequestBody Patient patient){
             return patientService.savePatient(patient);
-}
-	
+	}
+
+	//save patient form and redirect to consults page
+        @RequestMapping(value="/consult",method = {RequestMethod.POST})
+        public String submitForm(@ModelAttribute("patient") Patient patient) {
+            patientService.savePatient(patient);
+    	    return "consult";
+        }
 }

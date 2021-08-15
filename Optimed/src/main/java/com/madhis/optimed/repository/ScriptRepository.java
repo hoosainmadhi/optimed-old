@@ -12,6 +12,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  *
  * @author hoosain
  */
-public interface ScriptInterface extends JpaRepository<Script, Long>{
+public interface ScriptRepository extends JpaRepository<Script, Long>{
     
 }

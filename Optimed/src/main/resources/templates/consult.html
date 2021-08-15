@@ -7,8 +7,9 @@
 <body>
 
 <body>
-<div align="left">
+<div align="center">
     <h2>Patient Added</h2>
+    <p th:text="'Patient Id: ' + ${patient.patientId}" />
     <p th:text="'Patient Number: ' + ${patient.patientNumber}" />
     <p th:text="'Patient Name: ' + ${patient.patientName}" />
     <p th:text="'Medical Aid Number: ' + ${patient.medicalAidNumber}" />

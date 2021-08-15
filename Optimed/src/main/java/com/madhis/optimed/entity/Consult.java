@@ -20,8 +20,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-
-
 @Entity
 @Data
 @AllArgsConstructor
@@ -31,9 +29,6 @@ import lombok.ToString;
 @Table(
         name = "Consult"
       )
-
-
-
 
 public class Consult {
     @Id
