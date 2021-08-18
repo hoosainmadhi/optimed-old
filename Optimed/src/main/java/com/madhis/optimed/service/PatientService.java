@@ -14,6 +14,8 @@ public interface PatientService {
     
     public void deletePatientById(Long patientId);
     
-    public Patient fetchPatientById(Long id);
-
+    public Patient getPatientById(Long id);
+    
+   
+    
 }

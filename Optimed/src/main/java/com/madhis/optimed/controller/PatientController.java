@@ -41,7 +41,7 @@ public class PatientController {
    
 	@RequestMapping(value="/consult/{id}",method = {RequestMethod.GET})
         public String showConsultForm(Model model,@PathVariable(value = "id") Long patientId){
-		model.addAttribute(patientService.fetchPatientById(patientId));
+		model.addAttribute(patientService.getPatientById(patientId));
 		return "consult";
 	}	
         
@@ -61,6 +61,7 @@ public class PatientController {
         @RequestMapping(value="/consult",method = {RequestMethod.POST})
         public String submitForm(@ModelAttribute("patient") Patient patient) {
             patientService.savePatient(patient);
+	
     	    return "consult";
         }
 }

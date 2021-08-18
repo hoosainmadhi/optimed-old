@@ -36,10 +36,9 @@ public class PatientServiceImpl implements PatientService {
     }
     
     @Override
-    public Patient fetchPatientById(Long patientId){
+    public Patient getPatientById(Long patientId){
 	    return patientRepository.getById(patientId);
     }
-    
-    
+       
 
 }

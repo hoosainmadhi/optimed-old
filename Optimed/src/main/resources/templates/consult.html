@@ -1,20 +1,37 @@
 <!DOCTYPE HTML>
-<html xmlns:th="https://www.thymeleaf.org">
-<head> 
-    <title>Consult Details</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	
+<meta charset="ISO-8859-1"></meta>
+
+<title>Consult Details</title>
+    <!--<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />-->
 </head>
 <body>
 
 <body>
-<div align="center">
+<div align="left">
+	
     <h2>Patient Added</h2>
+     <form action="#" th:action="@{/dispense}" method="post" th:object="${patient}">
     <p th:text="'Patient Id: ' + ${patient.patientId}" />
     <p th:text="'Patient Number: ' + ${patient.patientNumber}" />
     <p th:text="'Patient Name: ' + ${patient.patientName}" />
     <p th:text="'Medical Aid Number: ' + ${patient.medicalAidNumber}" />
     <p th:text="'Medical Aid: ' + ${patient.medicalAid}" />
+    <br>
+    <tr>
+       <!--<p>Consult Date: <input type="text" th:field="*{consult_date}" /></p>-->
+       <!--<p><input type="text" th:value="${consult.consult_date}" name="consult_date"/></p>-->
+       <!--<p>Reservation Number : <input type="text" th:field="*{reservation_number}" /></p>-->
+     </tr>
+      <tr><input type="submit" value="Consult Details" /> <input type="reset" value="Reset" /></tr>
+           
+     
+     </form>
     
+        <br>    
         <a href="/new_patient">Add New Patient</a> <br>
         <a href="/patients">Patients</a>
 </div>

@@ -1,9 +1,10 @@
 
 package com.madhis.optimed.controller;
 
+import com.madhis.optimed.entity.Consult;
 import com.madhis.optimed.entity.Patient;
+import com.madhis.optimed.service.ConsultService;
 import com.madhis.optimed.service.PatientService;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,34 +16,41 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 //@RestController for Postman
 
-class PatientRestController {
+class ConsultRestController {
     
     @Autowired
-    private PatientService patientService;
-            
+    private ConsultService consultService;
    
-       @RequestMapping(value = "/rest",method = {RequestMethod.GET}) 
+    @Autowired
+    private PatientService patientService;
+    
+       @RequestMapping(value = "/rest_consults",method = {RequestMethod.GET}) 
         public String index(){
-            return "welcome - Rest Controller Managing all Rest calls";
+            return "welcome - Consults Rest Controller";
         }
     
-     
-        @RequestMapping(value = "/rest_patients",method = {RequestMethod.GET}) 
-        public List<Patient> fetchPatientList(){
-            return patientService.fetchPatientList();
-        }
+       @RequestMapping(value= "/patient/{patientId}/consult", method = {RequestMethod.POST})
+	public Consult newConsult(@PathVariable(value="patientId") Long patientId, @RequestBody Consult consult){
+		Patient patient = patientService.getPatientById(patientId);
+		patient.getConsults().add(consult);
+		System.out.println("consult = " + consult);
+		System.out.println("patientId = " + patientId);
+		patientService.savePatient(patient);
+		return consultService.addConsult(consult);
 	
-	@RequestMapping(value= "/rest_savepatient", method = {RequestMethod.POST})
-	public Patient savePatient(@RequestBody Patient patient){
-            return patientService.savePatient(patient);
-        }
+	}	
+     
+//        @RequestMapping(value = "/rest_patients",method = {RequestMethod.GET}) 
+//        public List<Patient> fetchPatientList(){
+//            return patientService.fetchPatientList();
+//        }
+	
 
-
-	@RequestMapping(value= "/rest_delete_patient/{id}", method = {RequestMethod.DELETE})
-	public void deletePatientById(@PathVariable(value="id") Long patientId){
-               patientService.deletePatientById(patientId);
-        }
-        
+//	@RequestMapping(value= "/rest_delete_patient/{id}", method = {RequestMethod.DELETE})
+//	public void deletePatientById(@PathVariable(value="id") Long patientId){
+//               patientService.deletePatientById(patientId);
+//        }
+//        
     
 //        @RequestMapping(value="/patient_form",method = {RequestMethod.GET})
 //        public String newPatientForm(Model model){

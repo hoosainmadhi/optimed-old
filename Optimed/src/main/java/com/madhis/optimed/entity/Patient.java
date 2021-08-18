@@ -1,5 +1,6 @@
 package com.madhis.optimed.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -19,12 +20,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-@Entity
 @ToString
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@Entity
 @Table(
         name = "Patient",
         uniqueConstraints = @UniqueConstraint(
@@ -40,12 +41,10 @@ public class Patient {
             name="patient_sequence",
             sequenceName="patient_sequence",
             allocationSize = 1
-            
     )
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
-            generator = "patient_seqeunce"
-    
+            generator = "patient_sequence"
     )
     private Long patientId;
     
@@ -67,6 +66,6 @@ public class Patient {
             name = "patient_id",
             referencedColumnName = "patientId"
     )
-    private List<Consult> consults;// Patient has List of Consults
+    private List<Consult> consults;// Patient can  have many List of Consults
     
 }

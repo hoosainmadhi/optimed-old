@@ -2,6 +2,7 @@ package com.madhis.optimed.test;
 
 import com.madhis.optimed.entity.Patient;
 import com.madhis.optimed.repository.PatientRepository;
+
 import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,7 @@ public class PatientRepositoryTest {
     public void savePatient(){
         Patient patient = Patient.builder()
                 .patientName("Mohammed Madhi")
-                .patientNumber("M004")
+                .patientNumber("M000000hamm")
                 .medicalAid("Genesis")
                 .medicalAidNumber("2445fff")
                 .build();
@@ -29,8 +30,6 @@ public class PatientRepositoryTest {
     public void printAllPatient() {
         List<Patient> patientList = patientRepository.findAll();
         System.out.println("patientList=" + patientList);
-        
-        
     }
     
     @Test
@@ -40,6 +39,7 @@ public class PatientRepositoryTest {
         
         System.out.println("patient =" + patients);
     }
+   
     
     @Test
     public void printgetPatientByPatientNumber(){
