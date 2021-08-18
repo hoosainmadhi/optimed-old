@@ -1,6 +1,6 @@
 package com.madhis.optimed.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -27,12 +27,12 @@ import lombok.ToString;
 @Builder
 @Entity
 @Table(
-        name = "Patient",
-        uniqueConstraints = @UniqueConstraint(
-                name="patient_number_unique",
-                columnNames="patientNumber"
-        )
-)
+        name = "Patient"
+        //uniqueConstraints = @UniqueConstraint(
+        //        name="patient_number_unique",
+        //        columnNames="patientNumber"
+        //)
+       )
 
 public class Patient {
     
@@ -59,13 +59,16 @@ public class Patient {
     
     // Define 1-Many Relation Patient can come for many consults.
     @OneToMany(
-            cascade = CascadeType.ALL,
-            fetch = FetchType.EAGER
+	    cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER,
+	    orphanRemoval = true
     )
     @JoinColumn(
             name = "patient_id",
             referencedColumnName = "patientId"
     )
     private List<Consult> consults;// Patient can  have many List of Consults
+    
+ 
     
 }

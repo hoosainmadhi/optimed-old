@@ -1,5 +1,6 @@
 package com.madhis.optimed.controller;
 
+import com.madhis.optimed.entity.Consult;
 import com.madhis.optimed.entity.Patient;
 import com.madhis.optimed.service.PatientService;
 import java.util.List;
@@ -19,6 +20,7 @@ public class PatientController {
     
     @Autowired
     private PatientService patientService;
+
             
        @RequestMapping(value = "/",method = {RequestMethod.GET}) 
         public String index(){
@@ -59,9 +61,16 @@ public class PatientController {
 
 	//save patient form and redirect to consults page
         @RequestMapping(value="/consult",method = {RequestMethod.POST})
-        public String submitForm(@ModelAttribute("patient") Patient patient) {
+        public String submitForm(Model model, @ModelAttribute("patient") Patient patient) {
+    	    Consult consult = new Consult(); 
+	    model.addAttribute("consult",consult);
             patientService.savePatient(patient);
-	
-    	    return "consult";
+	    return "consult";
+        }
+
+	//dispense 
+	@RequestMapping(value="/dispense",method = {RequestMethod.POST})
+	    public String dispenseForm(){
+    	    return "dispense";
         }
 }

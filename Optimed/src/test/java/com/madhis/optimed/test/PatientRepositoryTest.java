@@ -1,5 +1,6 @@
 package com.madhis.optimed.test;
 
+import com.madhis.optimed.entity.Consult;
 import com.madhis.optimed.entity.Patient;
 import com.madhis.optimed.repository.PatientRepository;
 
@@ -14,15 +15,25 @@ public class PatientRepositoryTest {
     
     @Autowired
     private PatientRepository patientRepository;
-    
+
+
+    	
     @Test
     public void savePatient(){
-        Patient patient = Patient.builder()
-                .patientName("Mohammed Madhi")
-                .patientNumber("M000000hamm")
-                .medicalAid("Genesis")
-                .medicalAidNumber("2445fff")
-                .build();
+
+	Consult consult = Consult.builder()
+		.consultDate("2020/01/01")
+		.reservationNumber("DISC001")
+		.build();
+	
+        Patient patient = 
+		Patient.builder()
+	                .patientName("Mohammed Madhi")
+        	        .patientNumber("M000000hamm")
+                	.medicalAid("Genesis")
+	                .medicalAidNumber("2445fff")
+			.consults(List.of(consult))
+        	        .build();
         patientRepository.save(patient);
     }
     

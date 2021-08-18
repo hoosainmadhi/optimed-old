@@ -40,6 +40,16 @@ class ConsultRestController {
 	
 	}	
      
+       @RequestMapping(value= "/consult/{patientId}", method = {RequestMethod.POST})
+	public Consult addConsult(@PathVariable(value="patientId") Long patientId, @RequestBody Consult consult){
+		Patient patient = patientService.getPatientById(patientId);
+		patient.getConsults().add(consult);
+		System.out.println("consult = " + consult);
+		System.out.println("patientId = " + patientId);
+		patientService.savePatient(patient);
+		return consultService.addConsult(consult);
+	
+	}	
 //        @RequestMapping(value = "/rest_patients",method = {RequestMethod.GET}) 
 //        public List<Patient> fetchPatientList(){
 //            return patientService.fetchPatientList();

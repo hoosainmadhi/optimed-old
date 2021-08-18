@@ -7,14 +7,13 @@
 <title>Patient Details</title>
 </head>
 <body>
-<div align="center">
+<div align="left">
     <h1>Patient Details</h1>
     <form action="#" th:action="@{/consult}" method="post" th:object="${patient}">
             <p>Patient Number: <input type="text" th:field="*{patientNumber}" /></p>
             <p>Patient Name: <input type="text" th:field="*{patientName}" /></p>
             <p>Medical Aid: <input type="text" th:field="*{medicalAid}" /></p>
             <p>Medical Aid Number: <input type="text" th:field="*{medicalAidNumber}" /></p>
-          
 	    <input type="submit" value="Add Patient" /> <input type="reset" value="Reset" />
     </form>
         <a href="/patients">Patients</a>
