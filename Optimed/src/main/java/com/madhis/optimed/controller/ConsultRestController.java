@@ -23,31 +23,35 @@ class ConsultRestController {
    
     @Autowired
     private PatientService patientService;
-    
-       @RequestMapping(value = "/rest_consults",method = {RequestMethod.GET}) 
+   
+
+       @RequestMapping(value = "/api/consults",method = {RequestMethod.GET}) 
         public String index(){
             return "welcome - Consults Rest Controller";
         }
     
        @RequestMapping(value= "/patient/{patientId}/consult", method = {RequestMethod.POST})
-	public Consult newConsult(@PathVariable(value="patientId") Long patientId, @RequestBody Consult consult){
+	public void newConsult(@PathVariable(value="patientId") Long patientId, @RequestBody Consult consult){
+		
 		Patient patient = patientService.getPatientById(patientId);
 		patient.getConsults().add(consult);
+		consultService.addConsult(consult);
 		System.out.println("consult = " + consult);
 		System.out.println("patientId = " + patientId);
-		patientService.savePatient(patient);
-		return consultService.addConsult(consult);
+		System.out.println("patient.getConsults = " + patient.getConsults());
 	
 	}	
      
        @RequestMapping(value= "/consult/{patientId}", method = {RequestMethod.POST})
-	public Consult addConsult(@PathVariable(value="patientId") Long patientId, @RequestBody Consult consult){
+	public void addConsult(@PathVariable(value="patientId") Long patientId, @RequestBody Consult consult){
 		Patient patient = patientService.getPatientById(patientId);
-		patient.getConsults().add(consult);
 		System.out.println("consult = " + consult);
 		System.out.println("patientId = " + patientId);
-		patientService.savePatient(patient);
-		return consultService.addConsult(consult);
+		System.out.println("getConsult =" + patient.getConsults());
+		patient.getConsults().add(consult);
+		//return patientService.savePatient(patient);
+		//return consultService.addConsult(consult);
+		//return consult;
 	
 	}	
 //        @RequestMapping(value = "/rest_patients",method = {RequestMethod.GET}) 

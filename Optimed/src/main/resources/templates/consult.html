@@ -25,8 +25,7 @@
 
     <tr>
 	    
-     <form action="#" th:action="@{/dispense}" method="post" th:object="${consult}"> 
-       <!--<p>Consult Date: <input type="text" th:field="*{}" /></p>-->
+     <form action="#" th:action="@{'/save_consult/' + ${patient.patientId}}" method="post" th:object="${consult}"> 
        <p>Consult Date: <input type="text" th:field="${consult.consultDate}" /></p>
        <p>Reservation Number : <input type="text" th:field="*{reservationNumber}" /></p>
      </tr>

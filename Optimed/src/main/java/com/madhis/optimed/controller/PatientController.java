@@ -2,6 +2,7 @@ package com.madhis.optimed.controller;
 
 import com.madhis.optimed.entity.Consult;
 import com.madhis.optimed.entity.Patient;
+import com.madhis.optimed.service.ConsultService;
 import com.madhis.optimed.service.PatientService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,9 @@ public class PatientController {
     @Autowired
     private PatientService patientService;
 
-            
+    @Autowired
+    private ConsultService consultService;
+    
        @RequestMapping(value = "/",method = {RequestMethod.GET}) 
         public String index(){
             return "index";
@@ -60,7 +63,7 @@ public class PatientController {
 	}
 
 	//save patient form and redirect to consults page
-        @RequestMapping(value="/consult",method = {RequestMethod.POST})
+        @RequestMapping(value="/save_patient",method = {RequestMethod.POST})
         public String submitForm(Model model, @ModelAttribute("patient") Patient patient) {
     	    Consult consult = new Consult(); 
 	    model.addAttribute("consult",consult);
@@ -69,8 +72,12 @@ public class PatientController {
         }
 
 	//dispense 
-	@RequestMapping(value="/dispense",method = {RequestMethod.POST})
-	    public String dispenseForm(){
-    	    return "dispense";
+	@RequestMapping(value="/save_consult/{id}",method = {RequestMethod.POST})
+	    public String dispenseForm(@ModelAttribute("consult") Consult consult, @PathVariable(value="id") Long patientId){ 
+		  
+		  Patient patient = patientService.getPatientById(patientId);
+		  patient.getConsults().add(consult);
+    	          consultService.addConsult(consult);
+		  return "dispense";
         }
 }
