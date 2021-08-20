@@ -16,15 +16,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-
 public class PatientController {
     
     @Autowired
     private PatientService patientService;
-
     @Autowired
-    private ConsultService consultService;
-    
+    private ConsultService consultService; 
        @RequestMapping(value = "/",method = {RequestMethod.GET}) 
         public String index(){
             return "index";
@@ -70,14 +67,5 @@ public class PatientController {
             patientService.savePatient(patient);
 	    return "consult";
         }
-
-	//dispense 
-	@RequestMapping(value="/save_consult/{id}",method = {RequestMethod.POST})
-	    public String dispenseForm(@ModelAttribute("consult") Consult consult, @PathVariable(value="id") Long patientId){ 
-		  
-		  Patient patient = patientService.getPatientById(patientId);
-		  patient.getConsults().add(consult);
-    	          consultService.addConsult(consult);
-		  return "dispense";
-        }
+	
 }

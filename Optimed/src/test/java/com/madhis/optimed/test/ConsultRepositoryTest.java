@@ -14,15 +14,15 @@ public class ConsultRepositoryTest {
 	private ConsultRepository consultRepository;
 	
 
-	@Test
-    	public void saveConsult(){
-        Consult consult = Consult.builder()
-                .consultDate("2000/08/01")
-                .reservationNumber("M000000hamm")
-               // .patient_id(2315)
-		.build();
-        consultRepository.save(consult);
-    }
+//	@Test
+//    	public void saveConsult(){
+//        Consult consult = Consult.builder()
+//                .consultDate("2000/08/01")
+//                .reservationNumber("M000000hamm")
+//               // .patient_id(2315)
+//		.build();
+//        consultRepository.save(consult);
+//    }
 
 	
 }
