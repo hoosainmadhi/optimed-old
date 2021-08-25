@@ -5,7 +5,11 @@ import com.madhis.optimed.entity.Patient;
 import com.madhis.optimed.service.PatientService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -13,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-//@RestController for Postman
 
 class PatientRestController {
     
@@ -32,6 +35,12 @@ class PatientRestController {
             return patientService.fetchPatientList();
         }
 	
+	//@RequestMapping(value = "/rest_get_patient/{id}", method = {RequestMethod.GET})
+	@GetMapping(value = "/rest_get_patients/{id}",produces = {MediaType.APPLICATION_JSON_VALUE})
+	public Patient getPatientById(@PathVariable(value="id") Long patientId){
+	     return patientService.findPatientById(patientId);	
+	} 	
+	
 	@RequestMapping(value= "/rest_savepatient", method = {RequestMethod.POST})
 	public Patient savePatient(@RequestBody Patient patient){
             return patientService.savePatient(patient);
@@ -43,53 +52,12 @@ class PatientRestController {
                patientService.deletePatientById(patientId);
         }
         
-    
-//        @RequestMapping(value="/patient_form",method = {RequestMethod.GET})
-//        public String newPatientForm(Model model){
-//            Patient patient = new Patient();
-//            model.addAttribute("patient", patient);
-//            return "patient_form";
-//        }
-// 
-//        @RequestMapping(value="/patient_form",method = {RequestMethod.POST})
-//        public String submitForm(@ModelAttribute("patient") Patient patient) {
-//            patientService.savePatient(patient);
-//    	    return "patientadded";
-//}
-//        
-//
-//	@RequestMapping(value="/patient_delete/{id}", method = {RequestMethod.GET,RequestMethod.POST})
-//        public String deletePatientId(Model model , @PathVariable(value="id") Long patientId){
-//            patientService.deletePatientById(patientId);
-//            List<Patient> listPatients = patientService.fetchPatientList();
-//            model.addAttribute("listPatients",listPatients);
-//            return "patients";  
-//	}       
-//	
-//        @PostMapping("/savepatients")
-//        public Patient savePatient(@RequestBody Patient patient){
-//            return patientService.savePatient(patient);
-//}
 
-
-//	@DeleteMapping("/patient_delete/{id}")
-//	    public String deletePatient(@PathVariable(name = "id") int id ) {
-//		patientService.deletePatientById();
-//		return "redirect:/";       
-//}
-
-//        @GetMapping("/patients")
-//        public List<Patient> fetchPatientList(){
-//            return patientService.fetchPatientList();
-//        }
-
-             
-//        @DeleteMapping("/patients/{id}")
-//        public void deletePatientById(@PathVariable(value="id") Long patientId){
-//               patientService.deletePatientById(patientId);
-//        }
-        
-        
+	//@RequestMapping(value="/rest_update_patient/{id}", method = {RequestMethod.PUT})
+	@PutMapping({"/rest_update_patient/{id}"})
+	public void updatePatient(@RequestBody Patient patient, @PathVariable(value="id") Long patientId){
+		patientService.updatePatient(patientId, patient);
+	}	
 
         
 }

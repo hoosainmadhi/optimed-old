@@ -16,12 +16,13 @@
 <body>
 <div align="left">
 	
-    <h2>Patient Added</h2>
-    <p th:text="'Patient Id: ' + ${patient.patientId}" />
-    <p th:text="'Patient Number: ' + ${patient.patientNumber}" />
-    <p th:text="'Patient Name: ' + ${patient.patientName}" />
-    <p th:text="'Medical Aid Number: ' + ${patient.medicalAidNumber}" />
-    <p th:text="'Medical Aid: ' + ${patient.medicalAid}" />
+    <h2>Patient Detail</h2>
+     <p th:text="'Patient Id: ' + ${patient.patientId}"/>
+     <p th:text="'Patient Number: ' + ${patient.patientNumber}" />
+     <p th:text="'Patient Name: ' + ${patient.patientName}" />
+     <p th:text="'Medical Aid Number: ' + ${patient.medicalAidNumber}" />
+     <p th:text="'Medical Aid: ' + ${patient.medicalAid}" /> 
+
     <br>
 
     <h2>Consult Details</h2>
@@ -32,11 +33,28 @@
        <p>Consult Date: <input type="text" th:field="${consult.consultDate}" /></p>
        <p>Reservation Number : <input type="text" th:field="*{reservationNumber}" /></p>
      </tr>
-      <tr><input type="submit" value="Consult Details" /> <input type="reset" value="Reset" /></tr>
+      <tr><input type="submit" value="Dispense Details" /> <input type="reset" value="Reset" /></tr>
      </form>
     
         <br>    
-        <a href="/new_patient">Add New Patient</a> <br>
+    	<h2>Previous Consults</h2>
+       
+	<!--<someHtmlTag th:each="item : ${items}">-->
+	<!--</someHtmlTag>-->	
+   <table>
+   <thead>
+	   <th>Consult Date</th>
+	   <th>Reservation Number</th>
+   </thead>	   
+   <tr th:each="consult: ${patient.consults}" >
+	   <td th:text="${consult.consultDate}"> </td>
+	   <td th:text="${consult.reservationNumber}"></td>
+   </tr>
+   </table>
+	
+	<br>
+	
+	<a href="/new_patient">Add New Patient</a> <br>
         <a href="/patients">Patients</a>
 </div>
 </body>

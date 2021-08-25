@@ -25,7 +25,5 @@ public interface PatientRepository extends JpaRepository<Patient, Long> {
     )
     Patient  getPatientByPatientNumberNative(String patientNumber);
   
-    
-    
 
 }

@@ -2,12 +2,12 @@ package com.madhis.optimed.controller;
 
 import com.madhis.optimed.entity.Consult;
 import com.madhis.optimed.entity.Patient;
-import com.madhis.optimed.service.ConsultService;
 import com.madhis.optimed.service.PatientService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,8 +20,7 @@ public class PatientController {
     
     @Autowired
     private PatientService patientService;
-    @Autowired
-    private ConsultService consultService; 
+       
        @RequestMapping(value = "/",method = {RequestMethod.GET}) 
         public String index(){
             return "index";
@@ -43,7 +42,11 @@ public class PatientController {
    
 	@RequestMapping(value="/consult/{id}",method = {RequestMethod.GET})
         public String showConsultForm(Model model,@PathVariable(value = "id") Long patientId){
-		model.addAttribute(patientService.getPatientById(patientId));
+		Consult consult = new Consult();
+		model.addAttribute(consult); //new  consults for form
+		Patient patient = patientService.findPatientById(patientId); //patient object for patient details
+		model.addAttribute(patient); 
+		model.addAttribute(patient.getConsults()); //previous consults
 		return "consult";
 	}	
         
@@ -67,5 +70,17 @@ public class PatientController {
             patientService.savePatient(patient);
 	    return "consult";
         }
+
+	@GetMapping(path="edit_patient/{id}")
+	public String editForm(Model model, @PathVariable(value="id") Long patientId){
+		model.addAttribute("patient",patientService.findPatientById(patientId));
+		return "edit_patient";
+	}
 	
+	@PostMapping(value="update_patient")
+	public String updatePatient(@ModelAttribute ("patient") Patient patient){
+		Long patientId=patient.getPatientId();
+	     	patientService.updatePatient(patientId, patient);
+		return "redirect:/patients";  
+	}	
 }

@@ -1,4 +1,3 @@
-
 package com.madhis.optimed.service;
 
 import com.madhis.optimed.entity.Patient;
@@ -6,16 +5,18 @@ import java.util.List;
 
 public interface PatientService {
     
-    public Patient savePatient(Patient patient);
-    
+   //getAll,getById,insert(save),update,delete
+	
     public List<Patient> fetchPatientList();
+    
+    public Patient findPatientById(Long id);
     
     public List<Patient> fetchPatientByName(String name);
     
+    public Patient savePatient(Patient patient);
+    
     public void deletePatientById(Long patientId);
     
-    public Patient getPatientById(Long id);
-    
-   
+    public void updatePatient(Long id, Patient patient);
     
 }

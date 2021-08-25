@@ -1,6 +1,5 @@
 package com.madhis.optimed.entity;
 
-import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -13,7 +12,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -68,7 +66,5 @@ public class Patient {
             referencedColumnName = "patientId"
     )
     private List<Consult> consults;// Patient can  have many List of Consults
-    
- 
     
 }

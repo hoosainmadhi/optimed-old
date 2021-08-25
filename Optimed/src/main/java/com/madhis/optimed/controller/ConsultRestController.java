@@ -33,7 +33,7 @@ class ConsultRestController {
        @RequestMapping(value= "/patient/{patientId}/consult", method = {RequestMethod.POST})
 	public void newConsult(@PathVariable(value="patientId") Long patientId, @RequestBody Consult consult){
 		
-		Patient patient = patientService.getPatientById(patientId);
+		Patient patient = patientService.findPatientById(patientId);
 		patient.getConsults().add(consult);
 		consultService.addConsult(consult);
 		System.out.println("consult = " + consult);
@@ -44,7 +44,7 @@ class ConsultRestController {
      
        @RequestMapping(value= "/consult/{patientId}", method = {RequestMethod.POST})
 	public void addConsult(@PathVariable(value="patientId") Long patientId, @RequestBody Consult consult){
-		Patient patient = patientService.getPatientById(patientId);
+		Patient patient = patientService.findPatientById(patientId);
 		System.out.println("consult = " + consult);
 		System.out.println("patientId = " + patientId);
 		System.out.println("getConsult =" + patient.getConsults());
