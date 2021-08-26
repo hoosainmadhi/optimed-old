@@ -1,4 +1,3 @@
-
 package com.madhis.optimed.controller;
 
 import com.madhis.optimed.entity.Patient;
