@@ -1,24 +1,62 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
+	
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" 
       rel="stylesheet" 
       integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" 
       crossorigin="anonymous">
-<meta charset="utf-8"/>
-<title>Optimed</title>
+<meta charset="ISO-8859-1"></meta>
+
+<title>Dispense Details</title>
+    <!--<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />-->
 </head>
 <body>
 
+<body>
+<div align="left">
+	
+    <h2>Patient Consult Detail</h2>
+     <p th:text="'Patient Name: ' + ${patient.patientName}"/>
+     <p th:text="'Consult Id: ' + ${consult.consultId}"/>
+     <p th:text="'Consult Date: ' + ${consult.consultDate}"/>
+     <p th:text="'Reservation Number: ' + ${consult.reservationNumber}"/>
 
-    <div align="center">
-        <h1>Fatima Madhi Optometrist</h1>
-        <a href="/new_patient">Add New Patient</a><br> 
+    <br>
+
+    <h2>Dispense Details</h2>
+
+    <tr>
+	    
+     <form action="#" th:action="@{'/dispense/' + ${consult.consultId}}" method="post" th:object="${dispense}"> 
+       <p>ICD10 : <input type="text" th:field="${dispense.icd10}" /></p>
+       <p>Tariff Code : <input type="text" th:field="${dispense.tariffCode}" /></p>
+       <p>Item : <input type="text" th:field="${dispense.dispenseItem}" /></p>
+       <p>Price : <input type="text" th:field="${dispense.price}" /></p>
+     </tr>
+      <tr><input type="submit" value="Dispense Details" /> <input type="reset" value="Reset" /></tr>
+     </form>
+    
+        <br>    
+<!--    	<h2>Previous Consults</h2>
+       
+	<someHtmlTag th:each="item : ${items}">
+	</someHtmlTag>	
+   <table>
+   <thead>
+	   <th>Consult Date</th>
+	   <th>Reservation Number</th>
+   </thead>	   
+   <tr th:each="consult: ${patient.consults}" >
+	   <td th:text="${consult.consultDate}"> </td>
+	   <td th:text="${consult.reservationNumber}"></td>
+   </tr>
+   </table>-->
+	
+	<br>
+	
+	<a href="/new_patient">Add New Patient</a> <br>
         <a href="/patients">Patients</a>
-    </div>
-
-    
-    
+</div>
 </body>
 </html>

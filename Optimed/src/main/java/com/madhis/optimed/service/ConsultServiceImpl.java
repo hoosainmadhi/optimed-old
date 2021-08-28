@@ -18,4 +18,9 @@ public class ConsultServiceImpl implements ConsultService {
 	return consultRepository.save(consult);
 	}
 
+    @Override
+    public Consult findByConsultId(Long consultId){
+    	return consultRepository.findConsultByConsultId(consultId);
+	
+    }    
 }

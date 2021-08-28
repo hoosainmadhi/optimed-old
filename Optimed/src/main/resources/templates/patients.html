@@ -37,7 +37,7 @@
                 <td th:text="${patient.medicalAid}">Medical Aid</td>
                 <td th:text="${patient.medicalAidNumber}">Medical Aid Number</td>
                 <td>
-                    <a th:href="@{/consult/{id}(id=${patient.patientId})}">Consult</a>
+                    <a th:href="@{/patient/{id}(id=${patient.patientId})} + '/consult'">Consult</a>
 		<td>
                     <a th:href="@{/edit_patient/{id}(id=${patient.patientId})}">Edit</a>
 		   &nbsp;&nbsp;&nbsp;

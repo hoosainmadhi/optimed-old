@@ -40,7 +40,7 @@ public class PatientController {
             return "new_patient";
         }
    
-	@RequestMapping(value="/consult/{id}",method = {RequestMethod.GET})
+	@RequestMapping(value="/patient/{id}/consult",method = {RequestMethod.GET})
         public String showConsultForm(Model model,@PathVariable(value = "id") Long patientId){
 		Consult consult = new Consult();
 		model.addAttribute(consult); //new  consults for form

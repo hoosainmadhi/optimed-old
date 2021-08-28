@@ -1,5 +1,6 @@
 package com.madhis.optimed.controller;
 
+import com.madhis.optimed.entity.Dispense;
 import com.madhis.optimed.entity.Consult;
 import com.madhis.optimed.entity.Patient;
 import com.madhis.optimed.service.ConsultService;
@@ -21,13 +22,17 @@ public class ConsultController {
 	@Autowired
 	private PatientService patientService;	
 
-	@RequestMapping(value="/save_consult/{id}",method = {RequestMethod.POST})
-        public String dispenseForm(@ModelAttribute("consult") Consult consult, @PathVariable(value="id") Long patientId){ 
+	@RequestMapping(value="/consult/{id}/dispense",method = {RequestMethod.POST})
+        public String dispenseForm(Model model, @ModelAttribute("consult") Consult consult, @PathVariable(value="id") Long patientId){ 
+		  Dispense dispense = new Dispense();
+		  model.addAttribute(dispense);
 		  Patient patient = patientService.findPatientById(patientId);
+		  model.addAttribute(patient);
 		  patient.getConsults().add(consult);
     	          consultService.addConsult(consult);
 		  return "dispense";
         }
+	
 
 //	@RequestMapping(value="consult/{id}",method = {RequestMethod.POST})
 //	public String consultForm(Model model, @PathVariable(value="id") Long patientId){

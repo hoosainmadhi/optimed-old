@@ -10,6 +10,8 @@ public interface ConsultRepository extends JpaRepository<Consult, Long>{
 
 	public List<Consult> findByConsultDate(String consultDate);
 	
+	public Consult findConsultByConsultId(Long consultId);
+	
 	
 
 }
