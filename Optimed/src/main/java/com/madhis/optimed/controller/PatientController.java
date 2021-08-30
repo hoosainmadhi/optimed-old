@@ -5,6 +5,7 @@ import com.madhis.optimed.entity.Patient;
 import com.madhis.optimed.service.PatientService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,8 +28,8 @@ public class PatientController {
         }
     
        @RequestMapping(value = "/patients",method = {RequestMethod.GET}) 
-        public String viewAllPatients(Model model){
-            List<Patient> listPatients = patientService.fetchPatientList();
+        public String viewAllPatients(Model model, @Param("keyword") String keyword){
+            List<Patient> listPatients = patientService.fetchPatientList(keyword);
             model.addAttribute("listPatients",listPatients);
             return "patients";
         }

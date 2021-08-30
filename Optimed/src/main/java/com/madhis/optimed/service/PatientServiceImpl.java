@@ -14,8 +14,11 @@ public class PatientServiceImpl implements PatientService {
     private PatientRepository patientRepository;
     
     @Override
-    public List<Patient> fetchPatientList(){
-        return patientRepository.findAll();
+    public List<Patient> fetchPatientList(String keyword){
+	    if (keyword != null){
+	       return patientRepository.search(keyword);
+	    }
+            return patientRepository.findAll();
     }
     
     @Override

@@ -7,7 +7,7 @@ public interface PatientService {
     
    //getAll,getById,insert(save),update,delete
 	
-    public List<Patient> fetchPatientList();
+    public List<Patient> fetchPatientList(String keyword);
     
     public Patient findPatientById(Long id);
     

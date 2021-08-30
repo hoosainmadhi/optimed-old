@@ -5,6 +5,7 @@ import com.madhis.optimed.entity.Patient;
 import com.madhis.optimed.service.PatientService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,9 +31,9 @@ class PatientRestController {
         }
     
      
-        @RequestMapping(value = "/rest_patients",method = {RequestMethod.GET}) 
-        public List<Patient> fetchPatientList(){
-            return patientService.fetchPatientList();
+        @RequestMapping(value = "/rest_patients",method = {RequestMethod.GET})
+        public List<Patient> fetchPatientList(@Param("keyword") String keyword){
+            return patientService.fetchPatientList(keyword);
         }
 	
 	//@RequestMapping(value = "/rest_get_patient/{id}", method = {RequestMethod.GET})

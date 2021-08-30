@@ -24,6 +24,13 @@ public interface PatientRepository extends JpaRepository<Patient, Long> {
             nativeQuery = true
     )
     Patient  getPatientByPatientNumberNative(String patientNumber);
-  
+    
+    @Query("SELECT p FROM Patient p WHERE "
+	    + "p.patientName LIKE %?1%"
+            + " OR p.patientNumber LIKE %?1%"
+            + " OR p.medicalAidNumber LIKE %?1%"
+            + " OR p.medicalAid LIKE %?1%"
+          )
+    public List<Patient> search(String keyword);
 
 }
