@@ -25,33 +25,52 @@
     <br>
 
     <h2>Dispense Details</h2>
-
-    <tr>
 	    
-     <form action="#" th:action="@{'/dispense/' + ${consult.consultId}}" method="post" th:object="${dispense}"> 
-       <p>ICD10 : <input type="text" th:field="${dispense.icd10}" /></p>
-       <p>Tariff Code : <input type="text" th:field="${dispense.tariffCode}" /></p>
-       <p>Item : <input type="text" th:field="${dispense.dispenseItem}" /></p>
-       <p>Price : <input type="text" th:field="${dispense.price}" /></p>
-     </tr>
-      <tr><input type="submit" value="Dispense Details" /> <input type="reset" value="Reset" /></tr>
+     
+      <!--<form action="#" th:action="@{'/dispense/' + ${consult.consultId}}" method="post" th:object="${dispense}">-->
+      <form action="#" th:action="@{'/patient/' + ${patient.patientId} + '/consult/' + ${consult.consultId}}" method="post" th:object="${dispense}">
+       <table border="1" cellpadding="10px" cellspacing="5px">    
+       <tr>    
+              <th>ICD10</th>    
+              <th>Tariff Code</th>    
+              <th>Item</th>    
+              <th>Price</th>    
+       </tr>   
+       <tr>
+              <td> <input type="text" th:field="${dispense.icd10}" /></td>
+              <td> <input type="text" th:field="${dispense.tariffCode}" /></td>
+              <td> <input type="text" th:field="${dispense.dispenseItem}" /></td>
+              <td> <input type="text" th:field="${dispense.price}" /></td>
+       </tr>
+       <tr>
+              <td><input type="submit" value="Add Item" /></td>
+	      <td> <input type="reset" value="Reset" /></td>
+       </tr>
+       </table>	  
      </form>
-    
         <br>    
-<!--    	<h2>Previous Consults</h2>
+    	<h2>Dispensed</h2>
        
-	<someHtmlTag th:each="item : ${items}">
-	</someHtmlTag>	
-   <table>
+	<!--<someHtmlTag th:each="item : ${items}">-->
+	<!--</someHtmlTag>-->	
+   <table border="1" cellpadding="10px" cellspacing="5px">
    <thead>
-	   <th>Consult Date</th>
-	   <th>Reservation Number</th>
+	   <th>ICD10</th>
+	   <th>Tariff Code</th>
+	   <th>Item</th>
+	   <th>Price</th>
    </thead>	   
-   <tr th:each="consult: ${patient.consults}" >
-	   <td th:text="${consult.consultDate}"> </td>
-	   <td th:text="${consult.reservationNumber}"></td>
+   <tr th:each="dispense: ${consult.dispenses}" >
+	   <td th:text="${dispense.icd10}"> </td>
+	   <td th:text="${dispense.tariffCode}"></td>
+	   <td th:text="${dispense.dispenseItem}"></td>
+	   <td th:text="${dispense.price}"></td>
    </tr>
-   </table>-->
+   <!--<tr th:each="consult: ${patient.consults}" >-->
+	   <!--<td th:text="${consult.consultDate}"> </td>-->
+	   <!--<td th:text="${consult.reservationNumber}"></td>-->
+   <!--</tr>-->
+   </table>
 	
 	<br>
 	
